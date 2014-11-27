@@ -63,17 +63,18 @@ foreach($data as $d)
 	}
 	imagedestroy($img);
 
-	$d['histogram']['luma']=mk_histo($h_l,$n);
-	$d['histogram']['red']=mk_histo($h_r,$n);
-	$d['histogram']['green']=mk_histo($h_g,$n);
-	$d['histogram']['blue']=mk_histo($h_b,$n);
-	$thumbs[$counter]=$d;
+	//$d['histogram']['luma']=mk_histo($h_l,$n);
+	//$d['histogram']['red']=mk_histo($h_r,$n);
+	//$d['histogram']['green']=mk_histo($h_g,$n);
+	//$d['histogram']['blue']=mk_histo($h_b,$n);
+	$h=array();
+	$h['luma']=mk_histo($h_l,$n);
+	$h['red']=mk_histo($h_r,$n);
+	$h['green']=mk_histo($h_g,$n);
+	$h['blue']=mk_histo($h_b,$n);
+	$fp=fopen('histogram/'.str_replace(':','_',$d['pid']).'.json','w');
+	fwrite($fp,json_encode($h,JSON_UNESCAPED_UNICODE));
+	fclose($fp);
 	$counter++;
 }
-$fp=fopen('SNG-metadata-with-thumbs-histogram.json','w');
-fwrite($fp,json_encode($thumbs, JSON_UNESCAPED_UNICODE));
-fclose($fp);
-
-
-
 ?>
