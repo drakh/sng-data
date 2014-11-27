@@ -1,9 +1,7 @@
 <?php
 $data=file('SNG-metadata.csv');
 $i=0;
-//http://www.webumenia.sk/cedvuweb/image/SVK_SNG.O_5952-th3.jpeg?id=SVK:SNG.O_5952
 $dx=array();
-$fp=fopen('SNG-metadata.json','w');
 foreach($data as $k => $v)
 {
 	if($i>0)
@@ -45,7 +43,7 @@ foreach($data as $k => $v)
 		}
 		$dx[]=array(
 			'pid'=>$dt[0],
-			'incentory_number'=>$dt[1],
+			'inventory_number'=>$dt[1],
 			'authority'=>$dt[2],
 			'name'=>$dt[3],
 			'date'=>$dt[4],
@@ -62,6 +60,7 @@ foreach($data as $k => $v)
 	}
 	$i++;
 }
+$fp=fopen('SNG-metadata.json','w');
 fwrite($fp,json_encode($dx,JSON_UNESCAPED_UNICODE));
 fclose($fp);
 ?>
